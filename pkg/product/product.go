@@ -23,6 +23,7 @@ func GetTestData() []Product {
 	return products
 }
 
+// QueryAll returns all products in the database
 func QueryAll() []Product {
 	db := infra.ConnectToDatabase()
 	defer db.Close()
