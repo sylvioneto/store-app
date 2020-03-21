@@ -45,3 +45,8 @@ func QueryAll() []Product {
 	}
 	return products
 }
+
+//Insert function inserts a product into the table
+func Insert()  {
+	
+}
