@@ -11,7 +11,6 @@ import (
 )
 
 var webTemplates = template.Must(template.ParseGlob("templates/*.html"))
-var count int 
 
 func main() {
 	log.Println("Starting webserver...")
@@ -20,10 +19,8 @@ func main() {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	count++
-	//products := queryAllProducts()
-	webTemplates.ExecuteTemplate(w, "Index", nil)
-	log.Println(count)
+	products := queryAllProducts()
+	webTemplates.ExecuteTemplate(w, "Index", products)
 }
 
 func queryAllProducts() []product.Product {
