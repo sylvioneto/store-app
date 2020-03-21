@@ -2,14 +2,15 @@ package product
 
 import (
 	"log"
+
 	"github.com/sylvioneto/store-app/pkg/infra"
 )
 
 // Product is the structure that defines store item
 type Product struct {
-	ID int
-	Name string
-	Price float64
+	ID       int
+	Name     string
+	Price    float64
 	Quantity int
 }
 
@@ -46,7 +47,17 @@ func QueryAll() []Product {
 	return products
 }
 
-//Insert function inserts a product into the table
-func Insert()  {
-	
+//Save function inserts a product into the table
+func (p *Product) Save() {
+	db := infra.ConnectToDatabase()
+	defer db.Close()
+	stmt, err := db.Prepare("insert into items(name, price, quantity) values($1,$2,$3)")
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	_, err = stmt.Exec(p.Name, p.Price, p.Quantity)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

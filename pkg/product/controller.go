@@ -1,7 +1,9 @@
 package product
 
 import (
+	"log"
 	"net/http"
+	"strconv"
 	"text/template"
 )
 
@@ -16,4 +18,25 @@ func Index(w http.ResponseWriter, r *http.Request) {
 // New redirects to the new page
 func New(w http.ResponseWriter, r *http.Request) {
 	webTemplates.ExecuteTemplate(w, "New", nil)
+}
+
+// Insert receives the form data and calls save method
+func Insert(w http.ResponseWriter, r *http.Request) {
+	log.Println("Insert method")
+	if r.Method == "POST" {
+		// convert values
+		quantity, err := strconv.Atoi(r.FormValue("quantity"))
+		if err != nil{
+			log.Fatalln(err.Error())
+		}
+		price, err := strconv.ParseFloat(r.FormValue("price"), 64)
+		if err != nil{
+			log.Fatalln(err.Error())
+		}
+
+		p := Product{Name: r.FormValue("name"), Price: price, Quantity: quantity}
+		p.Save()
+		log.Println(p)
+	}
+	http.Redirect(w, r, "/", 301)
 }
