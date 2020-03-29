@@ -51,3 +51,19 @@ func (p *Product) Save() {
 		log.Fatalln(err)
 	}
 }
+
+func (p *Product) Delete() {
+	log.Println(p.ID)
+	db := infra.ConnectToDatabase()
+	defer db.Close()
+	
+	stmt, err := db.Prepare("delete from items where id = $1")
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	_, err = stmt.Exec(p.ID)
+	if err != nil {
+		log.Fatalln(err)
+	}
+}

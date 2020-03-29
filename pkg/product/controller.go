@@ -40,3 +40,15 @@ func Insert(w http.ResponseWriter, r *http.Request) {
 	}
 	http.Redirect(w, r, "/", 301)
 }
+
+// Delete receives the id and redirects to database delete function
+func Delete(w http.ResponseWriter, r *http.Request) {
+	log.Println("Delete method")
+	productID, err := strconv.Atoi(r.URL.Query().Get("id"))
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+	product := Product{ID: productID}
+	product.Delete()
+	http.Redirect(w, r, "/", 301)
+}

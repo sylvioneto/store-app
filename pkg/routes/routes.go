@@ -9,4 +9,5 @@ func SetupRoutes() {
 	http.HandleFunc("/", product.Index)
 	http.HandleFunc("/product/new", product.New)
 	http.HandleFunc("/product/insert", product.Insert)
+	http.HandleFunc("/product/delete", product.Delete)
 }
