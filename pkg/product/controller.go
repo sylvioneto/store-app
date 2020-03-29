@@ -33,6 +33,7 @@ func Save(w http.ResponseWriter, r *http.Request) {
 			log.Fatalln(err.Error())
 		}
 
+		// new or existing product
 		if r.FormValue("id") == "" {
 			p := Product{Name: r.FormValue("name"), Price: price, Quantity: quantity}
 			p.save()
