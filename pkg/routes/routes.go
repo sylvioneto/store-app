@@ -1,13 +1,15 @@
 package routes
 
 import (
-	"github.com/sylvioneto/store-app/pkg/product"
 	"net/http"
+
+	"github.com/sylvioneto/store-app/pkg/product"
 )
 
 func SetupRoutes() {
 	http.HandleFunc("/", product.Index)
 	http.HandleFunc("/product/new", product.New)
-	http.HandleFunc("/product/insert", product.Insert)
+	http.HandleFunc("/product/save", product.Save)
 	http.HandleFunc("/product/delete", product.Delete)
+	http.HandleFunc("/product/edit", product.Edit)
 }

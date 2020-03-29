@@ -22,8 +22,9 @@
                         <tr>
                             <td>{{.ID}}</td>
                             <td>{{.Name}}</td>
-                            <td>{{.Quantity}}</td>
                             <td>{{.Price}}</td>
+                            <td>{{.Quantity}}</td>
+                            <td><a href="/product/edit?id={{.ID}}"><button class="btn btn-warning">Edit</button></a>
                             <td><a href="/product/delete?id={{.ID}}"><button class="btn btn-danger">Delete</button></a>
                             </td>
                         </tr>
