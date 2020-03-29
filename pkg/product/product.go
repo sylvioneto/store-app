@@ -14,16 +14,6 @@ type Product struct {
 	Quantity int
 }
 
-// GetTestData returns mock data
-func GetTestData() []Product {
-	products := []Product{
-		{1, "Rice", 11.99, 5},
-		{2, "Water", 0.99, 20},
-		{3, "Meat", 29.11, 1},
-	}
-	return products
-}
-
 // QueryAll returns all products in the database
 func QueryAll() []Product {
 	db := infra.ConnectToDatabase()
