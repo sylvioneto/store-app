@@ -19,7 +19,7 @@ func QueryAll() []Product {
 	db := infra.ConnectToDatabase()
 	defer db.Close()
 
-	rows, err := db.Query("select id, name, price, quantity from items")
+	rows, err := db.Query("select id, name, price, quantity from product")
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
@@ -41,7 +41,7 @@ func QueryAll() []Product {
 func (p *Product) Save() {
 	db := infra.ConnectToDatabase()
 	defer db.Close()
-	stmt, err := db.Prepare("insert into items(name, price, quantity) values($1,$2,$3)")
+	stmt, err := db.Prepare("insert into product(name, price, quantity) values($1,$2,$3)")
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -52,12 +52,13 @@ func (p *Product) Save() {
 	}
 }
 
+// Delete a product
 func (p *Product) Delete() {
 	log.Println(p.ID)
 	db := infra.ConnectToDatabase()
 	defer db.Close()
 	
-	stmt, err := db.Prepare("delete from items where id = $1")
+	stmt, err := db.Prepare("delete from product where id = $1")
 	if err != nil {
 		log.Fatalln(err)
 	}
